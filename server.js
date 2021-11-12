@@ -24,12 +24,20 @@ var urlsData = [];
 
 // Your first API endpoint
 app.post('/api/shorturl', function(req, res) {
+  var expression = "https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)";
+  var regex = new RegExp(expression);
+
+  if (!req.body.url.match(regex)) {
+    res.json({ error: 'invalid url' });
+}; 
+
   urlsData.push(req.body.url);
   res.json({ original_url: req.body.url, short_url: urlsData.findIndex((url)=>url === req.body.url) + 1 });
+
 });
 
 app.get('/api/shorturl/:shorturl', function(req, res) {
-  var index = Number(short_url) - 1;
+  var index = Number(req.params.shorturl) - 1;
   if (typeof urlsData[index] === 'undefined') res.json({error: "invalid input"});
   res.redirect(urlsData[index]);
 });
