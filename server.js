@@ -19,9 +19,11 @@ var urlsData = [];
 // Your first API endpoint
 app.post('/api/shorturl', function(req, res) {
   urlsData.push(req.body.url);
-  res.json({ original_url: req.body.url, short_url: urlsData.findIndex((url)=>url === req.body.url) + 1 });
+  res.json({ original_url: req.body.url });
 });
 
 app.listen(port, function() {
   console.log(`Listening on port ${port}`);
 });
+
+//short_url: urlsData.findIndex((url)=>url === req.body.url) + 1 }
