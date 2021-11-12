@@ -14,14 +14,12 @@ app.get('/', function(req, res) {
   res.sendFile(process.cwd() + '/views/index.html');
 });
 
-let shortUrl = 0;
+var urlsData = [];
 
 // Your first API endpoint
 app.post('/api/shorturl', function(req, res) {
-  var urls = {};
-  urls[req.body.url] = shortUrl++;
-
-  res.json({ original_url: req.body.url, short_url: urls[req.body.url] });
+  urlsData.push(req.body.url);
+  res.json({ original_url: req.body.url, short_url: urlsData.findIndex((url)=>url === req.body.url) + 1 });
 });
 
 app.listen(port, function() {
