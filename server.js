@@ -18,8 +18,8 @@ var urlsData = [];
 
 // Your first API endpoint
 app.post('/api/shorturl', function(req, res) {
-  urlsData.push(req.body.url);
-  res.json({ original_url: req.body.url });
+  //urlsData.push(req.body.url);
+  res.json({ original_url: "hello" });
 });
 
 app.listen(port, function() {
