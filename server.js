@@ -14,9 +14,14 @@ app.get('/', function(req, res) {
   res.sendFile(process.cwd() + '/views/index.html');
 });
 
+let shortUrl = 0;
+
 // Your first API endpoint
 app.post('/api/shorturl', function(req, res) {
-  res.json({ original_url: req.body.original_url, short_url: req.body.short_url });
+  var urls = {};
+  urls[req.body.url] = shortUrl++;
+
+  res.json({ original_url: req.body.url, short_url: urls[req.body.url] });
 });
 
 app.listen(port, function() {
