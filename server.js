@@ -15,8 +15,8 @@ app.get('/', function(req, res) {
 });
 
 // Your first API endpoint
-app.get('/api/hello', function(req, res) {
-  res.json({ greeting: 'hello API' });
+app.post('/api/shorturl', function(req, res) {
+  res.json({ original_url: req.body.original_url, short_url: req.body.short_url });
 });
 
 app.listen(port, function() {
