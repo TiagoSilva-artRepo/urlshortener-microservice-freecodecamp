@@ -28,6 +28,12 @@ app.post('/api/shorturl', function(req, res) {
   res.json({ original_url: req.body.url, short_url: urlsData.findIndex((url)=>url === req.body.url) + 1 });
 });
 
+app.get('/api/shorturl/:shorturl', function(req, res) {
+  var index = Number(short_url) - 1;
+  if (typeof urlsData[index] === 'undefined') res.json({error: "invalid input"});
+  res.redirect(urlsData[index]);
+});
+
 app.listen(port, function() {
   console.log(`Listening on port ${port}`);
 });
